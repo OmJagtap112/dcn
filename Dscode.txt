@@ -1,0 +1,525 @@
+Program1a
+include<stdio.h>
+#include<string.h>
+int main()
+{char a[20],b[20],c[20],temp;
+int l,i,j;
+printf("\n Enter the First String");
+scanf("%s",a);
+printf("\n Enter the Second String");
+scanf("%s",b);
+l=strlen(a);
+printf("\n Length of First String is %d",l);
+strcat(a,b);
+printf("\n Concatenation of String a & String b is %s", a);
+strcpy(c,a);
+printf("\n  Copied String is %s",c);
+i=0;
+j=strlen(a)-1;
+while(i<j)
+{temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+i++;
+j--; }
+printf("\n Reverse of original string is %s : \n ", a); }
+
+
+
+1B
+#include<stdio.h>
+#include<string.h>
+void main()
+{char str[20];
+char a[]="aeiouAEIOU";
+int i,j,count=0;
+printf("Enter the String... \n");
+gets(str);
+for(i=0;str[i]!='\0';i++)
+{for(j=0;a[j]!='\0';j++)
+{if(a[j]==str[i])
+{count++;
+break;}	}}
+printf("Vowels present in tne string are: %d \n",count);}
+
+PRACTICAL 2
+#include<stdio.h>
+int main()
+{int a[20],i,item,n,flag=0;
+printf("\n Enter the number of elements in array");
+scanf("%d",&n);
+printf("\n Enter %d Elements ",n);
+for(i=1;i<=n;i++)
+scanf("%d", &a[i]);
+printf("\nEnter the element to search");
+scanf("%d",&item);
+for(i=1;i<=n;i++)
+{if(item==a[i])
+{flag=1;
+break;}}
+if(flag==0)
+printf("\nElement not Found\n\n");
+else
+printf("\nElement %d found at position %d \n\n", item,i);
+		}
+BINARY SEARCH
+#include<stdio.h>
+void main()
+{int a[20],i,n,beg,mid,end,item,loc=-1;
+printf("\n Enter the number of elements in the list");
+scanf("%d",&n);
+printf(" \n Enter the elements in ascending order");
+for(i=1;i<=n;i++)
+{scanf("%d",&a[i]);}
+printf("\n Enter the element to search");
+scanf("%d",&item);
+beg=1;
+end=n;
+while(beg<=end)
+{mid=(beg+end)/2;
+if(item==a[mid])
+{ loc=mid;
+ break;	}
+else if(item>a[mid])
+{beg=mid+1;}
+else
+{end=mid-1;}}
+if(loc==-1)
+printf("\nElement not Found \n\n");
+else
+printf("\n Element %d found at location %d \n\n",item,loc);}
+
+PRACTICAL NO3
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+struct node
+{int data;
+struct node *next;}
+*start=NULL;
+void create()
+{//char ch;
+int k;
+do
+{ struct node *ptr;
+struct node *current;
+ptr=(struct node *)malloc(sizeof(struct node));
+printf("\n\n Enter the data");
+scanf("%d",&ptr->data);
+ptr->next=NULL;
+if(start==NULL)
+{start=ptr;
+current=ptr;}
+else
+{current->next=ptr;
+current=ptr;}
+printf("\n Do you want to create another? (1 for yes and 0 for no) ");
+scanf("%d",&k);}
+while(k!=0);}
+void display()
+{struct node *ptr;
+printf("\n\nThe Linked List is ::   ");
+pt=start;
+while(ptr!=NULL)
+{printf("%d---->",ptr->data);
+ptr=ptr->next;}
+printf("NULL\n\n\n");}
+void main()
+{create();
+display();}
+
+
+//Menu Driven Program to perform various operations on Linked List:
+
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+struct node
+{int data;
+struct node *next;}
+*start=NULL;
+void create()
+{//char ch;
+int k;
+do
+{ struct node *new_node;
+struct node *current;
+new_node=(struct node *)malloc(sizeof(struct node));
+printf("\n\n Enter the data");
+scanf("%d",&new_node->data);
+new_node->next=NULL;
+if(start==NULL)
+{start=new_node;
+ current=new_node;}
+else
+{current->next=new_node;
+current=new_node;}
+printf("\n Do you want to create another? (1 for yes and 0 for no) ");
+scanf("%d",&k);}
+while(k!=0);}
+void display()
+{struct node *new_node;
+printf("\n\nThe Linked List is ::   ");
+new_node=start;
+while(new_node!=NULL)
+{printf("%d---->",new_node->data);
+new_node=new_node->next;}
+printf("NULL\n\n\n");}
+void  delete_beg()
+{ struct  node  *temp;
+temp=start;
+start=start->next;
+temp->next=NULL;
+free(temp);
+display();}
+void insert_beg()
+{int num;
+ struct node *new_node;
+ new_node=(struct node*)malloc(sizeof(struct node));
+ printf("Enter data:");
+scanf("%d",&num);
+new_node->data=num;
+if(start==NULL)                 //If list is empty
+{new_node->next=NULL;
+start=new_node;}
+else
+{new_node->next=start;
+start=new_node;}
+display();}
+add_after(int d,int pos)
+{struct node *temp,*q;
+int i;
+q=start;
+for(i=0;i<pos-1;i++)
+{q=q->next;
+if(q==NULL)
+{printf("There are less than %d elements",pos);
+return;}}
+temp=malloc(sizeof(struct node) );
+temp->next=q->next;
+temp->data=d;
+q->next=temp;
+display();}
+void main()
+{int choice,n,e,position,i;
+while(1)
+{printf("\n1.Create a linked List\n");
+printf("2.Insert at begining\n");
+printf("3.Add after \n");
+printf("4.Delete from begining \n");
+printf("5.Display\n");
+printf("6.Quit\n\n");
+printf("Enter your choice : ");
+scanf("%d",&choice);
+switch(choice)
+
+{case 1: create();
+break;
+case 2: insert_beg();
+break;
+case 3: printf("Enter the element : ");
+scanf("%d",&e);
+printf("Enter the position after which this element is inserted : ");
+scanf("%d",&position);
+add_after(e,position);
+break;
+case 4: delete_beg();
+	break;
+case 5: display();
+	break;
+case 6: exit(1);
+default: printf("Wrong choice\n");
+} //End of switch
+*}//End of while}
+
+   PRACTICAL NO4
+#include <stdio.h>
+#define MAXSIZE 5
+
+/* Structure definition for stack */
+struct stack       	
+{int stk[MAXSIZE];
+int top;}s;
+typedef struct stack STACK;
+STACK s;
+
+/* Function declaration/Prototype*/
+void push (void);
+int  pop(void);
+void display (void);
+void main ()
+{int choice;
+int option = 1;
+s.top = 0;
+printf ("STACK OPERATION\n");
+while(option)
+{printf ("------------------------------------------\n");
+printf ("  	1	-->	PUSH	           \n");
+printf ("  	2	-->	POP	           \n");
+printf ("  	3	-->	DISPLAY	           \n");
+printf ("  	4	-->	EXIT		   \n");
+printf ("------------------------------------------\n");
+printf ("Enter your choice\n");
+scanf	("%d", &choice);
+switch (choice)
+{case 1: push();
+break;
+case 2:pop();
+	break;
+case 3:display();
+	break;
+case 4:return;}
+fflush(stdin);
+printf("Do you want to continue(Type 1 for Yes or 0 for No)?\n");
+scanf("%d", &option);}}
+
+/*Function to add an element to the stack*/
+void push ()
+{int num;
+if (s.top == (MAXSIZE))
+{printf ("Stack is Full\n");
+return;}
+else
+{printf ("Enter the element to be pushed\n");
+scanf ("%d", &num);
+s.top = s.top + 1;
+s.stk[s.top] = num;}
+return;}
+
+/*Function to delete an element from the stack*/
+int pop ()
+{int num;
+if (s.top == 0)
+{printf ("Stack is Empty\n");
+return (s.top);}
+else
+{num = s.stk[s.top];
+printf ("poped element is = %d\n", s.stk[s.top]);
+s.top = s.top - 1;}
+return(num);}
+
+/*Function to display the status of the stack*/
+void display ()
+{int i;
+if (s.top == 0)
+{printf ("Stack is empty\n");
+return;}
+else
+{printf ("\nThe status of the stack is\n");
+for (i = s.top; i > 0; i--)
+{printf ("%d\n", s.stk[i]);}}
+printf ("\n");}
+
+PRACTICAL 5
+#include<stdio.h>
+#include<ctype.h>
+
+char stack[100];
+int top = -1;
+
+void push(char x)
+{
+    stack[++top] = x;
+}
+
+char pop()
+{
+    if(top == -1)
+        return -1;
+    else
+        return stack[top--];
+}
+
+int priority(char x)
+{
+    if(x == '(')
+        return 0;
+    if(x == '+' || x == '-')
+        return 1;
+    if(x == '*' || x == '/')
+        return 2;
+    return 0;
+}
+
+int main()
+{
+    char exp[100];
+    char *e, x;
+    printf("Enter the expression : ");
+    scanf("%s",exp);
+    printf("\n");
+    e = exp;
+    
+    while(*e != '\0')
+    {
+        if(isalnum(*e))
+            printf("%c ",*e);
+        else if(*e == '(')
+            push(*e);
+        else if(*e == ')')
+        {
+            while((x = pop()) != '(')
+                printf("%c ", x);
+        }
+        else
+        {
+            while(priority(stack[top]) >= priority(*e))
+                printf("%c ",pop());
+            push(*e);
+        }
+        e++;
+    }
+    
+    while(top != -1)
+    {
+        printf("%c ",pop());
+    }return 0;
+}
+
+
+PRACTICAL 6
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+    hanoi(4, 'A', 'B', 'C');
+    return 0;
+}
+ 
+void hanoi(int n, char rodFrom, char rodMiddle, char rodTo){
+    if(n==1){
+        printf("Disk 1 moved from %c to %c \n",rodFrom,rodTo);
+        return;
+    }
+    hanoi(n-1,rodFrom,rodTo,rodMiddle);
+    printf("Disk %d moved from %c to %c \n",n,rodFrom,rodTo);
+    hanoi(n-1,rodMiddle,rodFrom,rodTo);
+ 
+}
+
+PRACTICAL NO 7
+#include<stdio.h>
+typedef struct node
+{  int data;
+struct node *left;
+struct node *right;}
+node;
+node *create()
+{ node *p;
+int x;
+printf("Enter data(-1 for no data):");
+scanf("%d",&x);
+if(x==-1)
+return NULL;
+p=(node*)malloc(sizeof(node));
+p->data=x;
+printf("Enter left child of %d:\n",x);
+p->left=create();
+printf("Enter right child of %d:\n",x);
+p->right=create();
+return p;}
+
+void preorder(node *t)                //address of root node is passed in t
+{if(t!=NULL)
+{printf("\n%d",t->data);   	  //visit the root
+preorder(t->left);          	 //preorder traversal on left subtree
+preorder(t->right);      		//preorder traversal on right subtree }}
+int main()
+{node *root;
+root=create();
+printf("\nThe preorder traversal of tree is:\n");
+preorder(root);
+return 0;}
+
+PRACTICAL 8
+#include<stdio.h>
+void quicksort(int [10],int,int);
+int main(){
+int x[20],size,i;
+printf("\nEnter size of the array: ");
+scanf("%d",&size);
+printf("\nEnter %d elements: ",size);
+for(i=0;i<size;i++)
+scanf("%d",&x[i]);
+quicksort(x,0,size-1);
+printf("\nSorted elements: ");
+for(i=0;i<size;i++)
+printf(" %5d",x[i]);
+printf("\n\n");
+return 0;}
+void quicksort(int x[10],int first,int last){
+int pivot,j,temp,i;
+if(first<last){
+pivot=first;
+i=first;
+j=last;
+while(i<j){
+while(x[i]<=x[pivot]&&i<last)
+i++;
+while(x[j]>x[pivot])
+j--;
+if(i<j){
+temp=x[i];
+x[i]=x[j];
+x[j]=temp;}}
+temp=x[pivot];
+x[pivot]=x[j];
+x[j]=temp;
+quicksort(x,first,j-1);
+quicksort(x,j+1,last);}}
+
+
+
+MERGE SORT
+#include<stdio.h>
+#define MAX 50
+void mergeSort(int arr[],int low,int mid,int high);
+void partition(int arr[],int low,int high);
+int main()
+{int merge[MAX],i,n;
+printf("\nEnter the total number of elements: ");
+scanf("%d",&n);
+printf("\nEnter the elements which to be sort: ");
+for(i=0;i<n;i++){
+scanf("%d",&merge[i]);}
+partition(merge,0,n-1);
+printf("\nAfter merge sorting elements are: ");
+for(i=0;i<n;i++){
+printf("%d ",merge[i]);}
+printf("\n\n");
+return 0;}
+
+void partition(int arr[],int low,int high){
+int mid;
+if(low<high){
+mid=(low+high)/2;
+partition(arr,low,mid);
+partition(arr,mid+1,high);
+mergeSort(arr,low,mid,high);}}
+void mergeSort(int arr[],int low,int mid,int high){
+int i,m,k,l,temp[MAX];
+l=low;
+i=low;
+m=mid+1;
+while((l<=mid)&&(m<=high)){
+if(arr[l]<=arr[m]){
+temp[i]=arr[l];
+l++; }
+else{
+temp[i]=arr[m];
+m++;}
+i++;  }
+if(l>mid)
+{for(k=m;k<=high;k++){
+temp[i]=arr[k];
+i++;}}
+else{
+for(k=l;k<=mid;k++){
+temp[i]=arr[k];
+i++; }}
+for(k=low;k<=high;k++){
+arr[k]=temp[k];}}
+
+
+
